@@ -1,0 +1,80 @@
+name: incloud
+namespace: cloud
+company_domain: makrotan.com
+
+provider_spec:
+  # none, basic, bearer_token
+#  auth_type: none
+  auth_type: bearer_token
+  fields:
+    tenant_id:
+      type: string
+      required: True
+#    host:
+#      required: True
+
+resources:
+  incloud_project:
+    primary_key: identifier
+    url:
+      template: /api/v1/tenant/%s/project/%s
+      args: ["provider.tenant_id", "fields.identifier"]
+    fields:
+      identifier:
+        type: string
+        map_to: id
+      name:
+        type: string
+        optional: True
+
+  incloud_process:
+    primary_key: identifier
+    url:
+      template: api/v1/tenant/%s/project/%s/process/%s
+      args: [ "provider.tenant_id", "fields.project_id", "fields.identifier" ]
+    fields:
+      identifier:
+        type: string
+        map_to: id
+      name:
+        type: string
+        optional: True
+      project_id:
+        type: string
+        force_new: True
+      spec:
+        type: string
+
+  incloud_secret:
+    primary_key: identifier
+    url:
+      template: api/v1/tenant/%s/secret/%s
+      args: [ "provider.tenant_id", "fields.identifier" ]
+    fields:
+      identifier:
+        type: string
+        map_to: id
+      data:
+        type: map
+        sensitive: true
+
+  incloud_app:
+    primary_key: identifier
+    url:
+      template: api/v1/tenant/%s/app/%s
+      args: [ "provider.tenant_id", "fields.identifier" ]
+    fields:
+      identifier:
+        type: string
+        map_to: id
+      name:
+        type: string
+      git_url:
+        type: string
+      branch:
+        type: string
+        required: false
+        default: "main"
+      status:
+        type: string
+        computed: true

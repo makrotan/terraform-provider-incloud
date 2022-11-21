@@ -16,6 +16,7 @@ provider_spec:
 resources:
   incloud_project:
     primary_key: identifier
+    description: Projects are containers which contain multiple processes.
     url:
       template: /api/v1/tenant/%s/project/%s
       args: ["provider.tenant_id", "fields.identifier"]
@@ -25,7 +26,6 @@ resources:
         map_to: id
       name:
         type: string
-        optional: True
 
   incloud_process:
     primary_key: identifier
@@ -38,7 +38,6 @@ resources:
         map_to: id
       name:
         type: string
-        optional: True
       project_id:
         type: string
         force_new: True

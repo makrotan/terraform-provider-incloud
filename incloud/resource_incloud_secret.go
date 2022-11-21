@@ -153,7 +153,6 @@ func resourceIncloudSecretRead(ctx context.Context, d *schema.ResourceData, m in
 
 	return diags
 }
-
 func resourceIncloudSecretUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	return resourceIncloudSecretCreate(ctx, d, m)
 }

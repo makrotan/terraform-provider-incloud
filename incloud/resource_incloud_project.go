@@ -149,7 +149,6 @@ func resourceIncloudProjectRead(ctx context.Context, d *schema.ResourceData, m i
 
 	return diags
 }
-
 func resourceIncloudProjectUpdate(ctx context.Context, d *schema.ResourceData, m interface{}) diag.Diagnostics {
 	return resourceIncloudProjectCreate(ctx, d, m)
 }
